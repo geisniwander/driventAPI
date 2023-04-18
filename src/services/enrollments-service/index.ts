@@ -1,6 +1,6 @@
 import { Address, Enrollment } from '@prisma/client';
 import { request } from '@/utils/request';
-import { invalidDataError, notFoundError } from '@/errors';
+import { invalidDataError, noContentError, notFoundError } from '@/errors';
 import addressRepository, { CreateAddressParams } from '@/repositories/address-repository';
 import enrollmentRepository, { CreateEnrollmentParams } from '@/repositories/enrollment-repository';
 import { exclude } from '@/utils/prisma-utils';
@@ -10,7 +10,7 @@ async function getAddressFromCEP(cep: string): Promise<AddressEnrollment> {
   const result = await request.get(`${process.env.VIA_CEP_API}/${cep}/json/`);
 
   if (!result.data || result.data.erro) {
-    throw notFoundError(); // lança um erro para quem chamou essa função!
+    throw noContentError(); // lança um erro para quem chamou essa função!
   }
 
   const { bairro, localidade, uf, complemento, logradouro } = result.data;
@@ -26,8 +26,8 @@ async function getAddressFromCEP(cep: string): Promise<AddressEnrollment> {
   return address;
 }
 
-async function getOneWithAddressByUserId(userId: number): Promise<GetOneWithAddressByUserIdResult> {
-  const enrollmentWithAddress = await enrollmentRepository.findWithAddressByUserId(userId);
+async function getAddressByUserId(userId: number): Promise<GetOneWithAddressByUserIdResult> {
+  const enrollmentWithAddress = await enrollmentRepository.findAddressByUserId(userId);
 
   if (!enrollmentWithAddress) throw notFoundError();
 
@@ -77,7 +77,7 @@ export type CreateOrUpdateEnrollmentWithAddress = CreateEnrollmentParams & {
 };
 
 const enrollmentsService = {
-  getOneWithAddressByUserId,
+  getAddressByUserId,
   createOrUpdateEnrollmentWithAddress,
   getAddressFromCEP,
 };

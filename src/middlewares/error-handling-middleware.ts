@@ -38,6 +38,13 @@ export function handleApplicationErrors(
     });
   }
 
+  if (err.name === 'BadRequestError') {
+    return res.sendStatus(httpStatus.BAD_REQUEST);
+  }
+
+  if (err.name === 'NoContentError') {
+    return res.sendStatus(httpStatus.NO_CONTENT);
+  }
   /* eslint-disable-next-line no-console */
   console.error(err.name);
   res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
