@@ -90,4 +90,9 @@ export type CreateTicketType = {
   userId: number;
 };
 
+export type HotelRooms = {
+  hotelId: number;
+  userId: number;
+};
+
 export type FindPaymentsType = { userId: number; ticketId: number };

@@ -21,9 +21,19 @@ export async function findHotels(req: AuthenticatedRequest, res: Response, next:
   }
 }
 
-export async function findHotelsWithRooms(req: AuthenticatedRequest, res: Response) {
+export async function findHotelsWithRooms(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  const { userId } = req as UserIdRequest;
+  const hotelId = Number(req.params.hotelId);
+
   try {
-  } catch (error) {
-    return res.status(httpStatus.NOT_FOUND).send({});
+    const hotelWithRooms = await hotelService.findHotelsWithRooms({ userId, hotelId });
+
+    if (!hotelWithRooms || !hotelWithRooms.id) {
+      throw notFoundError();
+    }
+
+    return res.status(httpStatus.OK).send(hotelWithRooms);
+  } catch (err) {
+    return handleApplicationErrors(err, req, res, next);
   }
 }
