@@ -42,6 +42,10 @@ export function handleApplicationErrors(
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 
+  if (err.name === 'PaymentError') {
+    return res.sendStatus(httpStatus.PAYMENT_REQUIRED);
+  }
+
   if (err.name === 'NoContentError') {
     return res.sendStatus(httpStatus.NO_CONTENT);
   }
