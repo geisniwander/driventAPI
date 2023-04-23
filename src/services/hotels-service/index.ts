@@ -20,8 +20,13 @@ async function findHotels(userId: number) {
   return result;
 }
 
+async function findHotelsWithRooms() {
+  return 1;
+}
+
 const hotelService = {
   findHotels,
+  findHotelsWithRooms,
 };
 
 export default hotelService;

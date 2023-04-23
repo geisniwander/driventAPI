@@ -16,6 +16,7 @@ module.exports = {
     '@typescript-eslint/no-namespace': 'off',
     'import/newline-after-import': ['error'],
     'lines-between-class-members': ['error', 'always'],
+    'import/export': 0,
   },
   settings: {
     'import/parsers': {

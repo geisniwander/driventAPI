@@ -10,7 +10,7 @@
     "start": "node dist/server.js",
     "migration:run": "prisma migrate deploy",
     "migration:generate": "npm run dev:load-envs prisma migrate dev",
-    "lint": "eslint . --fix",
+    "lint": "eslint .",
     "lint:staged": "lint-staged",
     "test": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand",
     "test:migration:run": "npm run test:load-envs prisma migrate deploy",
