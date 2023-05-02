@@ -14,7 +14,7 @@ async function findBookings(userId: number) {
 
 async function putBooking({ userId, bookingId, roomId }: putBooking) {
   const booking = await bookingRepository.findById(bookingId);
-  if (!booking) throw notFoundError();
+  if (!booking) throw forbiddenError();
   if (booking.userId !== userId) throw unauthorizedError();
 
   const room = await hotelRepository.findRoom(roomId);
@@ -40,7 +40,7 @@ async function createBooking({ userId, roomId }: bookingRooms) {
   if (ticketType.isRemote || !ticketType.includesHotel) throw forbiddenError();
 
   const room = await hotelRepository.findRoom(roomId);
-  if (!room) throw forbiddenError();
+  if (!room) throw notFoundError();
 
   const bookingsInARoom = await bookingRepository.countBookingsByRoomId(roomId);
   if (room.capacity === 0 || room.capacity === null || room.capacity - bookingsInARoom <= 0) throw forbiddenError();
