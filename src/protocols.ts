@@ -95,4 +95,15 @@ export type HotelRooms = {
   userId: number;
 };
 
+export type putBooking = {
+  roomId: number;
+  bookingId: number;
+  userId: number;
+};
+
+export type bookingRooms = {
+  roomId: number;
+  userId: number;
+};
+
 export type FindPaymentsType = { userId: number; ticketId: number };

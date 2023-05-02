@@ -1,4 +1,4 @@
-import { noContentError, notFoundError, paymentError } from '@/errors';
+import { notFoundError, paymentError } from '@/errors';
 import { HotelRooms } from '@/protocols';
 import enrollmentRepository from '@/repositories/enrollment-repository';
 import hotelRepository from '@/repositories/hotel-repository';

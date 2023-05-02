@@ -49,6 +49,9 @@ export function handleApplicationErrors(
   if (err.name === 'NoContentError') {
     return res.sendStatus(httpStatus.NO_CONTENT);
   }
+  if (err.name === 'ForbiddenError') {
+    return res.sendStatus(httpStatus.FORBIDDEN);
+  }
   /* eslint-disable-next-line no-console */
   console.error(err.name);
   res.status(httpStatus.INTERNAL_SERVER_ERROR).send({

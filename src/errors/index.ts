@@ -8,3 +8,4 @@ export * from './request-error';
 export * from './bad-request-error';
 export * from './no-content-error';
 export * from './payment-required-error';
+export * from './forbidden-error';
