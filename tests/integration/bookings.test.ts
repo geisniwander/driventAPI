@@ -249,7 +249,7 @@ describe('PUT /booking', () => {
     expect(response.status).toBe(httpStatus.UNAUTHORIZED);
   });
 
-  it('should respond with status 404 if there is no booking', async () => {
+  it('should respond with status 403 if there is no booking', async () => {
     const token = await generateValidToken();
 
     const response = await server
@@ -258,7 +258,7 @@ describe('PUT /booking', () => {
       .set('Content-Type', 'application/json')
       .send({ roomId: 1 });
 
-    expect(response.status).toBe(httpStatus.NOT_FOUND);
+    expect(response.status).toBe(httpStatus.FORBIDDEN);
   });
 
   it('should respond with status 404 if room does not exists', async () => {
